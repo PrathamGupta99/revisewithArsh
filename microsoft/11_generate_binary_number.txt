@@ -1,0 +1,21 @@
+string toBinary(int n)
+{
+    string r;
+    while (n != 0){
+        r += ( n % 2 == 0 ? "0" : "1" );
+        n /= 2;
+    }
+    reverse(r.begin(), r.end());
+    return r;
+}
+
+vector<string> generate(int N)
+{
+	vector<string> ans;
+	for(int i=1;i<=N;i++)
+	{
+	    string str = toBinary(i);
+	    ans.push_back(str);
+	}
+	return ans;
+}

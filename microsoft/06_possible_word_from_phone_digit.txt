@@ -1,0 +1,35 @@
+class Solution
+{
+    public:
+    void findCombinations(vector<char> keypad[], vector<string> &ans, int input[], string res, int index, int n)
+    {
+        if (index == n) {
+            ans.push_back(res);
+            return;
+        }
+    
+        int digit = input[index];
+        int len = keypad[digit].size();
+        for (int i = 0; i < len; i++) {
+            findCombinations(keypad, ans, input, res + keypad[digit][i], index + 1, n);
+        }
+    }
+    vector<string> possibleWords(int a[], int n)
+    {
+        vector<string> ans;
+        vector<char> keypad[] =
+        {
+            {}, {},        
+            { 'a', 'b', 'c' },
+            { 'd', 'e', 'f' },
+            { 'g', 'h', 'i' },
+            { 'j', 'k', 'l' },
+            { 'm', 'n', 'o' },
+            { 'p', 'q', 'r', 's'},
+            { 't', 'u', 'v' },
+            { 'w', 'x', 'y', 'z'}
+        };
+        findCombinations(keypad, ans, a, string(""), 0, n );
+        return ans;
+    }
+};

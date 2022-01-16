@@ -1,0 +1,48 @@
+
+class Solution{
+    public:
+    
+    void dfs(vector<int> &vis, string &str, vector<vector<int>> &adj,  int curr)
+    {
+        vis[curr] = 1;
+        for(auto xx : adj[curr])
+        {
+            if(!vis[xx])
+            {
+                dfs(vis,str,adj,xx);
+            }
+        }
+        str += (curr + 'a');
+    }
+    
+    string findOrder(string dict[], int N, int K) {
+        //code here
+        vector<vector<int>> adj(K);
+        for(int i=0;i<N-1;i++)
+        {
+            string w1 = dict[i];
+            string w2 = dict[i+1];
+            
+            for(int j=0;j<min(w1.size(),w2.size());j++)
+            {
+                if(w1[j]!=w2[j])
+                {
+                    adj[w1[j]-'a'].push_back(w2[j]-'a');
+                    break;
+                }
+            }
+        }
+        
+        vector<int> vis(K);
+        string str = "";
+        
+        for(int i=0;i<K;i++)
+        {
+            if(!vis[i])
+                dfs(vis,str,adj,i);
+        }
+        
+        reverse(str.begin(),str.end());
+        return str;
+    }
+};
